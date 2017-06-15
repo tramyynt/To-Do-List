@@ -6,6 +6,14 @@ function get_todos() {
     }
     return todos;
 }
+function validateInput() {
+    var x = document.getElementById('task').value;
+    if (x == "") {
+        alert("Name must be filled out");
+        return false;
+    }
+    return true;
+}
 function checked() {
     var id = this.getAttribute('id');
     var todos = get_todos();
@@ -16,11 +24,13 @@ function checked() {
 }
  
 function add() {
+    if(!validateInput()) return 1;
     var task = document.getElementById('task').value;
     var todos = get_todos();
     todos.push({name: task, checked: false});
     localStorage.setItem('todo', JSON.stringify(todos));
     show();
+    document.getElementById('task').value = "";
     return false;
 }
  
